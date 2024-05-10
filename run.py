@@ -1,3 +1,4 @@
+# wiring up API and getting access to google sheet
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -12,8 +13,18 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
-sales = SHEET.worksheet('sales')
+# to get sales data from users
 
-data = sales.get_all_values()
+def get_sales_data():
+    """
+    Get sales figures inpput from the user
+    """
+    print("Please enter sales data from the last market.")
+    print("Data should be six numbers, seperated by commas")
+    print("Example: 10, 20, 30, 40, 50, 60\n")
 
-print(data)
+    data_str = input("Enter your data here: ")
+    print(f"The data provided is {data_str}")
+
+get_sales_data()
+
